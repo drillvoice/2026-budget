@@ -66,8 +66,8 @@
       "none": {
         "status": "unaffected",
         "title": "Capital gains: little to no impact",
-        "body": "If you're not expecting significant capital gains, this change barely touches you. Around 83% of the benefit of the current 50% CGT discount goes to the top 10% of taxpayers by income.",
-        "cites": ["cgt-top10"],
+        "body": "In any given year, about 93% of taxpayers report no capital gain at all — and your family home stays exempt regardless. If you're not expecting significant gains, this change barely touches you.",
+        "cites": ["cgt-reporters"],
         "link": "#capital-gains"
       },
       "existing": {
@@ -121,6 +121,23 @@
         "cites": ["trust-carveouts"],
         "link": "#trusts"
       }
+    }
+  },
+  "pies": {
+    "property": {
+      "share": 14,
+      "caption": "~14% of taxfilers have a rental interest",
+      "ariaLabel": "Pie chart: about 14 per cent of taxfilers have an interest in a rental property; 86 per cent do not."
+    },
+    "gains": {
+      "share": 7,
+      "caption": "~7% of taxpayers report a capital gain in a year",
+      "ariaLabel": "Pie chart: about 7 per cent of taxpayers report a capital gain in a given year; 93 per cent report none."
+    },
+    "trust": {
+      "share": 5,
+      "caption": "~5% of taxfilers receive trust distributions",
+      "ariaLabel": "Pie chart: about 5 per cent of taxfilers received a discretionary trust distribution; 95 per cent did not."
     }
   },
   "benefits": {

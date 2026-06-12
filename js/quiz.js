@@ -125,7 +125,16 @@
     verdictsEl.innerHTML = quiz.questions
       .map((q) => {
         const v = quiz.verdicts[q.id][answers[q.id]];
+        const pie = quiz.pies && quiz.pies[q.id];
+        const pieHtml = pie
+          ? `<div class="pie-wrap">
+              <div class="pie" role="img" aria-label="${pie.ariaLabel}"
+                style="--share:${pie.share}%"></div>
+              <p class="pie-caption">${pie.caption}</p>
+            </div>`
+          : "";
         return `<article class="verdict" data-status="${v.status}">
+          ${pieHtml}
           <p class="status">${quiz.statusLabels[v.status]}</p>
           <h4>${v.title}</h4>
           <p>${v.body}${citeHtml(v.cites)}</p>

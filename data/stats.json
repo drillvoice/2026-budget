@@ -109,6 +109,15 @@
       "notes": ""
     },
     {
+      "id": "cgt-reporters",
+      "value": "Only about 7% of taxpayers reported a capital gain in 2022–23 — roughly 93% reported none — though the share rises to 16.7% among the top 10% of income earners",
+      "source": "Grattan Institute, 2026 Budget cheat sheet (analysis of ATO data)",
+      "url": "https://grattan.edu.au/news/grattan-institutes-2026-budget-cheat-sheet/",
+      "year": "2022–23",
+      "verified": true,
+      "notes": "Underlying data: ATO Taxation Statistics 2022–23, CGT statistics."
+    },
+    {
       "id": "startup-review",
       "value": "The Treasurer has confirmed the Government is examining options for the treatment of capital gains of small and startup businesses where indexation applies to a low or zero cost base",
       "source": "SmartCompany — Labor considers startup CGT changes after founder backlash",
