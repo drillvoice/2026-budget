@@ -123,6 +123,32 @@
       }
     }
   },
+  "benefits": {
+    "heading": "And the other side of the ledger",
+    "intro": "These reforms aren't only about who loses a concession — the same Budget returns money to workers and redirects support toward housing supply. If you earn income from work, these apply to you:",
+    "items": [
+      {
+        "title": "A $1,000 instant deduction, no receipts",
+        "body": "From 2026–27, anyone with work income can claim a flat $1,000 deduction for work-related expenses without keeping a single receipt. If your real expenses are higher, you can still itemise as before.",
+        "cites": ["instant-deduction"]
+      },
+      {
+        "title": "The Working Australians Tax Offset",
+        "body": "From 2027–28, a permanent offset of up to $250 a year for income earned from work. Around 13 million workers receive it, and 97% are expected to get the full amount.",
+        "cites": ["wato"]
+      },
+      {
+        "title": "Less investor competition for first home buyers",
+        "body": "Treasury forecasts the reforms will shift around 75,000 homes from investors to first home buyers over the next decade, with price growth moderating for a couple of years.",
+        "cites": ["fhb-shift"]
+      },
+      {
+        "title": "Revenue redirected to housing supply",
+        "body": "The Budget includes a $2 billion Local Infrastructure Fund for the roads, water and power that unlock new housing — and negative gearing stays fully available for new builds and affordable-housing investments, pointing investment at supply.",
+        "cites": ["supply-fund"]
+      }
+    ]
+  },
   "statusLabels": {
     "unaffected": "Unaffected",
     "grandfathered": "Protected by grandfathering",

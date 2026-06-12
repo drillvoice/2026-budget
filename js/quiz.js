@@ -69,6 +69,18 @@
     .join("");
 
   const form = document.getElementById("quiz-form");
+
+  // Gently advance to the next unanswered question when one is answered.
+  // CSS `scroll-behavior: smooth` (with a reduced-motion override) governs the easing.
+  form.addEventListener("change", (e) => {
+    if (!e.target.matches('input[type="radio"]')) return;
+    const fieldsets = [...form.querySelectorAll("fieldset")];
+    const current = e.target.closest("fieldset");
+    const next = fieldsets
+      .slice(fieldsets.indexOf(current) + 1)
+      .find((fs) => !fs.querySelector("input:checked"));
+    if (next) next.scrollIntoView({ block: "center" });
+  });
   const result = document.getElementById("quiz-result");
   const verdictsEl = document.getElementById("quiz-verdicts");
 
@@ -104,6 +116,16 @@
         </article>`;
       })
       .join("");
+
+    const b = quiz.benefits;
+    document.getElementById("quiz-benefits").innerHTML = `
+      <h4 class="benefits-heading">${b.heading}</h4>
+      <p>${b.intro}</p>
+      <ul class="benefits">
+        ${b.items
+          .map((it) => `<li><strong>${it.title}.</strong> ${it.body}${citeHtml(it.cites)}</li>`)
+          .join("")}
+      </ul>`;
 
     result.hidden = false;
     result.scrollIntoView({ block: "start" });

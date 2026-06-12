@@ -73,6 +73,42 @@
       "notes": ""
     },
     {
+      "id": "wato",
+      "value": "The Working Australians Tax Offset (WATO) gives workers a permanent tax offset of up to $250 a year from 2027–28; of the 13 million workers who receive it, 97% are expected to get the full $250",
+      "source": "Australian Government, Budget 2026–27 factsheet: New tax cuts for Australian workers",
+      "url": "https://budget.gov.au/content/factsheets/download/tax-explainers-new-tax-cuts-workers.pdf",
+      "year": "2026",
+      "verified": true,
+      "notes": "Applies to income from work (wages, salary, sole trader income), not income from assets. Raises the effective tax-free threshold for workers to $19,985."
+    },
+    {
+      "id": "instant-deduction",
+      "value": "From 2026–27, workers can claim a $1,000 instant deduction for work-related expenses with no receipts or records; those with higher actual expenses can still itemise as usual",
+      "source": "Australian Government, Budget 2026–27 factsheet: New tax cuts for Australian workers",
+      "url": "https://budget.gov.au/content/factsheets/download/tax-explainers-new-tax-cuts-workers.pdf",
+      "year": "2026",
+      "verified": true,
+      "notes": "Stackable with the WATO from 2027–28."
+    },
+    {
+      "id": "fhb-shift",
+      "value": "Treasury forecasts the negative gearing and CGT reforms will shift around 75,000 homes from investors to first home buyers over the next decade, with house price growth moderating by around 2 percentage points for a couple of years",
+      "source": "CommBank, 2026 Budget: Updated housing outlook (reporting Treasury modelling)",
+      "url": "https://www.commbank.com.au/articles/newsroom/2026/05/2026-budget-updated-housing-outlook.html",
+      "year": "2026",
+      "verified": true,
+      "notes": "The same modelling estimates overall housing supply about 35,000 dwellings lower over the decade and rents around $2 a week higher at the current median — see the honest caveats section."
+    },
+    {
+      "id": "supply-fund",
+      "value": "The Budget directs revenue toward housing supply, including a $2 billion Local Infrastructure Fund for enabling infrastructure for new housing, while negative gearing remains fully available for new builds and investments supporting government housing programs, including affordable housing",
+      "source": "CommBank, 2026 Budget: Updated housing outlook; Budget 2026–27 tax reform overview",
+      "url": "https://www.commbank.com.au/articles/newsroom/2026/05/2026-budget-updated-housing-outlook.html",
+      "year": "2026",
+      "verified": true,
+      "notes": ""
+    },
+    {
       "id": "startup-review",
       "value": "The Treasurer has confirmed the Government is examining options for the treatment of capital gains of small and startup businesses where indexation applies to a low or zero cost base",
       "source": "SmartCompany — Labor considers startup CGT changes after founder backlash",
