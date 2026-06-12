@@ -1,6 +1,23 @@
 (async function () {
   "use strict";
 
+  // Render 10×10 waffle charts: <figure class="waffle" data-highlight="N" data-label="...">
+  // (no data dependency — render before fetching, so they appear even if the fetch fails)
+  document.querySelectorAll("figure.waffle").forEach((fig) => {
+    const n = Math.max(0, Math.min(100, parseInt(fig.dataset.highlight, 10) || 0));
+    const grid = document.createElement("div");
+    grid.className = "waffle-grid";
+    grid.setAttribute("role", "img");
+    grid.setAttribute("aria-label", fig.dataset.label || "");
+    for (let i = 0; i < 100; i++) {
+      const dot = document.createElement("span");
+      dot.className = "dot" + (i < n ? " dot-hl" : "");
+      dot.setAttribute("aria-hidden", "true");
+      grid.appendChild(dot);
+    }
+    fig.prepend(grid);
+  });
+
   let quiz, statsById;
   try {
     const [quizRes, statsRes] = await Promise.all([

@@ -89,6 +89,27 @@ legend { font-weight: 700; font-size: 1.05rem; margin-bottom: 0.5rem; padding: 0
 ul.benefits { margin: 0; padding-left: 1.2rem; }
 ul.benefits li { margin: 0.5rem 0; }
 
+/* Waffle charts */
+figure.waffle {
+  margin: 1.5rem 0; padding: 1.25rem 1.25rem 1rem;
+  background: #fff; border: 1px solid var(--rule); border-radius: 8px;
+}
+.waffle-grid {
+  display: grid; grid-template-columns: repeat(20, 1fr); gap: 5px;
+  max-width: 30rem; margin-bottom: 0.75rem;
+}
+.waffle .dot {
+  aspect-ratio: 1; border-radius: 50%; background: #d8d2c4;
+}
+.waffle .dot-hl { background: var(--accent); }
+.waffle-dollars .dot { border-radius: 3px; }
+.waffle-dollars .dot-hl { background: var(--affected); }
+figure.waffle figcaption { font-size: 0.92rem; color: var(--ink-soft); }
+figure.waffle figcaption strong { color: var(--ink); }
+@media (max-width: 480px) {
+  .waffle-grid { grid-template-columns: repeat(10, 1fr); }
+}
+
 /* Citations & sources */
 sup.cite { line-height: 0; }
 sup.cite a { text-decoration: none; color: var(--accent); font-weight: 600; padding: 0 0.1em; }
