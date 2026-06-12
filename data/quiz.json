@@ -125,19 +125,19 @@
   },
   "pies": {
     "property": {
-      "share": 14,
-      "caption": "~14% of taxfilers have a rental interest",
-      "ariaLabel": "Pie chart: about 14 per cent of taxfilers have an interest in a rental property; 86 per cent do not."
+      "share": 86,
+      "caption": "~86% of taxfilers have no rental property",
+      "ariaLabel": "Pie chart: about 86 per cent of taxfilers have no interest in a rental property; about 14 per cent do."
     },
     "gains": {
-      "share": 7,
-      "caption": "~7% of taxpayers report a capital gain in a year",
-      "ariaLabel": "Pie chart: about 7 per cent of taxpayers report a capital gain in a given year; 93 per cent report none."
+      "share": 93,
+      "caption": "~93% of taxpayers report no capital gain in a year",
+      "ariaLabel": "Pie chart: about 93 per cent of taxpayers report no capital gain in a given year; about 7 per cent do."
     },
     "trust": {
-      "share": 5,
-      "caption": "~5% of taxfilers receive trust distributions",
-      "ariaLabel": "Pie chart: about 5 per cent of taxfilers received a discretionary trust distribution; 95 per cent did not."
+      "share": 95,
+      "caption": "~95% of taxfilers receive no trust distributions",
+      "ariaLabel": "Pie chart: about 95 per cent of taxfilers received no discretionary trust distribution; about 5 per cent did."
     }
   },
   "benefits": {
