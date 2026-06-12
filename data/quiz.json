@@ -1,0 +1,132 @@
+{
+  "questions": [
+    {
+      "id": "property",
+      "text": "Do you own a residential investment property (a rental, not the home you live in)?",
+      "options": [
+        { "value": "none", "label": "No" },
+        { "value": "before", "label": "Yes — bought (or signed the contract) before Budget night, 12 May 2026" },
+        { "value": "after-established", "label": "Yes — an established property bought after 12 May 2026" },
+        { "value": "new-build", "label": "Yes — a newly built property, or I'm planning to buy/build new" }
+      ]
+    },
+    {
+      "id": "gains",
+      "text": "Do you expect to sell assets — shares, property, a business — for a significant capital gain in the coming years?",
+      "options": [
+        { "value": "none", "label": "No, or nothing significant" },
+        { "value": "existing", "label": "Yes — mostly assets I already own today" },
+        { "value": "future", "label": "Yes — mostly assets I'll buy from here on" },
+        { "value": "startup", "label": "Yes — startup equity or founder shares with a very low cost base" }
+      ]
+    },
+    {
+      "id": "trust",
+      "text": "Do you receive income distributions from a trust?",
+      "options": [
+        { "value": "none", "label": "No" },
+        { "value": "discretionary", "label": "Yes — from a family (discretionary) trust" },
+        { "value": "testamentary", "label": "Yes — from a testamentary trust (set up by a will) that existed on 12 May 2026" },
+        { "value": "excluded", "label": "Yes — from a special disability trust or a deceased estate" }
+      ]
+    }
+  ],
+  "verdicts": {
+    "property": {
+      "none": {
+        "status": "unaffected",
+        "title": "Negative gearing: doesn't apply to you",
+        "body": "Like more than 8 in 10 Australian taxfilers, you own no investment property — so the negative gearing change can't touch you. In 2022–23, about 2.26 million individuals (out of roughly 16 million who lodged returns) had an interest in a rental property.",
+        "cites": ["investors-count"],
+        "link": "#negative-gearing"
+      },
+      "before": {
+        "status": "grandfathered",
+        "title": "Negative gearing: you're grandfathered",
+        "body": "Properties acquired (by contract date) before 7:30pm on 12 May 2026 are not affected. You can keep negatively gearing this property exactly as before — the change only applies to established properties bought after Budget night.",
+        "cites": ["ng-grandfathering"],
+        "link": "#negative-gearing"
+      },
+      "after-established": {
+        "status": "affected",
+        "title": "Negative gearing: this change applies to you",
+        "body": "For established properties bought after Budget night, rental losses from 1 July 2027 are quarantined: they can only offset rental income or capital gains from rental property, not your salary. The losses aren't lost — they carry forward.",
+        "cites": ["ng-grandfathering"],
+        "link": "#negative-gearing"
+      },
+      "new-build": {
+        "status": "unaffected",
+        "title": "Negative gearing: new builds keep full negative gearing",
+        "body": "The reform deliberately preserves — and channels — negative gearing toward new construction. A new build can still be negatively geared against your other income, and you can choose between the 50% CGT discount and the new arrangements.",
+        "cites": ["ng-grandfathering"],
+        "link": "#negative-gearing"
+      }
+    },
+    "gains": {
+      "none": {
+        "status": "unaffected",
+        "title": "Capital gains: little to no impact",
+        "body": "If you're not expecting significant capital gains, this change barely touches you. Around 83% of the benefit of the current 50% CGT discount goes to the top 10% of taxpayers by income.",
+        "cites": ["cgt-top10"],
+        "link": "#capital-gains"
+      },
+      "existing": {
+        "status": "grandfathered",
+        "title": "Capital gains: your existing gains keep the 50% discount",
+        "body": "Gains accrued before 1 July 2027 retain the 50% discount even if you sell later — only growth after that date moves to indexation plus the 30% minimum rate. A valuation at 1 July 2027 (or an ATO formula) splits the two.",
+        "cites": ["cgt-transition"],
+        "link": "#capital-gains"
+      },
+      "future": {
+        "status": "affected",
+        "title": "Capital gains: the new rules will apply to you",
+        "body": "For assets bought from here on, you'll pay tax only on real (above-inflation) gains, at a minimum 30% rate. Whether that's better or worse than the 50% discount depends on how fast the asset grows relative to inflation — for modest, steady growth the difference is small; for very fast growth the new rules tax more of the gain.",
+        "cites": ["cgt-transition", "cgt-top10"],
+        "link": "#capital-gains"
+      },
+      "startup": {
+        "status": "edge-case",
+        "title": "Capital gains: you're in the genuine edge case",
+        "body": "Indexation is harsh for fast-appreciating assets with a near-zero cost base — startup equity is the textbook example. This is a real design problem, and the Government has confirmed it is examining a targeted fix for small and startup businesses. See the honest caveats section below.",
+        "cites": ["startup-review"],
+        "link": "#caveats"
+      }
+    },
+    "trust": {
+      "none": {
+        "status": "unaffected",
+        "title": "Trusts: doesn't apply to you",
+        "body": "About 5% of individual taxfilers received discretionary trust distributions in 2022–23. By the Government's own estimate, more than 95% of taxfilers won't be affected by this change in any given year — and if you receive no trust income, that includes you.",
+        "cites": ["trust-recipients"],
+        "link": "#trusts"
+      },
+      "discretionary": {
+        "status": "affected",
+        "title": "Trusts: this change applies to you",
+        "body": "From 1 July 2028, distributions from discretionary trusts are taxed at a minimum of 30%. If you're a beneficiary on a marginal rate below 30% (often the result of income splitting), the tax on those distributions rises to 30%. If your marginal rate is already 30% or above, little changes.",
+        "cites": ["trust-recipients", "trust-carveouts"],
+        "link": "#trusts"
+      },
+      "testamentary": {
+        "status": "grandfathered",
+        "title": "Trusts: testamentary trusts existing at Budget night are excluded",
+        "body": "Testamentary trusts in existence on 12 May 2026 are carved out of the minimum tax — as are deceased estates and special disability trusts. Despite the 'death tax' framing, the measure does not tax inheritance at all.",
+        "cites": ["trust-carveouts"],
+        "link": "#trusts"
+      },
+      "excluded": {
+        "status": "unaffected",
+        "title": "Trusts: your trust is explicitly excluded",
+        "body": "Special disability trusts and deceased estates are excluded from the minimum tax, along with charitable trusts, fixed and widely held trusts, and complying super funds.",
+        "cites": ["trust-carveouts"],
+        "link": "#trusts"
+      }
+    }
+  },
+  "statusLabels": {
+    "unaffected": "Unaffected",
+    "grandfathered": "Protected by grandfathering",
+    "affected": "Affected — here's how",
+    "edge-case": "A genuine edge case"
+  }
+}

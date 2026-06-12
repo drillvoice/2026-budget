@@ -1,0 +1,85 @@
+{
+  "stats": [
+    {
+      "id": "investors-count",
+      "value": "2,261,080 individuals had an interest in at least one rental property in 2022–23",
+      "source": "ATO Taxation Statistics 2022–23, Individuals — rentals",
+      "url": "https://www.ato.gov.au/about-ato/research-and-statistics/in-detail/taxation-statistics",
+      "year": "2022–23",
+      "verified": true,
+      "notes": "Out of roughly 16 million individuals who lodged tax returns. The share of people with no investment property is therefore roughly 85% of taxfilers (about 80% if measured against the ~11.4 million net taxpayers). Site copy uses 'more than 8 in 10' to stay robust to the choice of denominator."
+    },
+    {
+      "id": "ng-cost",
+      "value": "Negative gearing reduced personal income tax revenue by about $10.9 billion in 2023–24",
+      "source": "Treasury analysis, reported in The Conversation",
+      "url": "https://theconversation.com/how-many-of-australias-2-2-million-property-investors-would-lose-out-under-a-new-plan-to-curb-negative-gearing-262595",
+      "year": "2023–24",
+      "verified": true,
+      "notes": "Projected to reach $12.3 billion in 2024–25."
+    },
+    {
+      "id": "cgt-top10",
+      "value": "Around 83% of the benefit of the current CGT discount goes to the top 10% of taxpayers by income",
+      "source": "Prime Minister of Australia, media release on tax reform (Budget 2026–27)",
+      "url": "https://www.pm.gov.au/media/tax-reform-workers-businesses-and-future-generations",
+      "year": "2026",
+      "verified": true,
+      "notes": "Consistent with Grattan Institute's submission on reforming the CGT discount."
+    },
+    {
+      "id": "trust-recipients",
+      "value": "About 810,000 adults — around 5% of individual taxfilers — received distributions from discretionary trusts in 2022–23 (plus about 120,000 non-filers, predominantly minors)",
+      "source": "Australian Government, Budget 2026–27 factsheet: Minimum tax on discretionary trusts",
+      "url": "https://budget.gov.au/content/factsheets/download/tax-explainers-minimum-tax-discretionary-trusts.pdf",
+      "year": "2022–23",
+      "verified": true,
+      "notes": "The factsheet states more than 95% of individual taxfilers will not be affected in any given year."
+    },
+    {
+      "id": "ng-grandfathering",
+      "value": "Properties acquired (contract date) before 7:30pm AEST on 12 May 2026 are not affected by the negative gearing changes",
+      "source": "ATO — New legislation: Reforming negative gearing and capital gains tax",
+      "url": "https://www.ato.gov.au/about-ato/new-legislation/in-detail/individuals/tax-reform-boosting-home-ownership-reforming-negative-gearing-and-capital-gains-tax",
+      "year": "2026",
+      "verified": true,
+      "notes": "For established properties acquired after Budget night, rental losses are quarantined against rental income and gains from 1 July 2027. New builds retain full negative gearing."
+    },
+    {
+      "id": "cgt-transition",
+      "value": "Gains accrued before 1 July 2027 keep the 50% discount; indexation and the 30% minimum tax apply only to gains accrued after that date",
+      "source": "Baker McKenzie, Budget Bites — CGT Discount and Negative Gearing",
+      "url": "https://www.bakermckenzie.com/en/insight/publications/2026/05/australia-budget-bites-cgt-discount-and-negative-gearing",
+      "year": "2026",
+      "verified": true,
+      "notes": "Asset owners can use a formal valuation at 1 July 2027 or an ATO apportionment formula to split pre- and post-reform gains."
+    },
+    {
+      "id": "trust-carveouts",
+      "value": "Excluded from the trust minimum tax: testamentary trusts in existence on 12 May 2026, special disability trusts, deceased estates, charitable trusts, fixed and widely held trusts, and complying super funds; primary production income and certain income of vulnerable minors are also carved out",
+      "source": "Australian Government, Budget 2026–27 factsheet: Minimum tax on discretionary trusts",
+      "url": "https://budget.gov.au/content/factsheets/download/tax-explainers-minimum-tax-discretionary-trusts.pdf",
+      "year": "2026",
+      "verified": true,
+      "notes": "The measure applies from 1 July 2028."
+    },
+    {
+      "id": "trust-small-business",
+      "value": "Around 350,000 active small businesses — fewer than 15% of all active small businesses — operate through a discretionary trust",
+      "source": "Australian Government, Budget 2026–27 factsheet: Minimum tax on discretionary trusts",
+      "url": "https://budget.gov.au/content/factsheets/download/tax-explainers-minimum-tax-discretionary-trusts.pdf",
+      "year": "2026",
+      "verified": true,
+      "notes": ""
+    },
+    {
+      "id": "startup-review",
+      "value": "The Treasurer has confirmed the Government is examining options for the treatment of capital gains of small and startup businesses where indexation applies to a low or zero cost base",
+      "source": "SmartCompany — Labor considers startup CGT changes after founder backlash",
+      "url": "https://www.smartcompany.com.au/federal-budget-2026/labor-startup-cgt-tweaks-founder-backlash/",
+      "year": "2026",
+      "verified": true,
+      "notes": "Options reportedly include letting qualifying startups keep the 50% discount or a concession close to current arrangements."
+    }
+  ]
+}
