@@ -123,8 +123,8 @@ export async function onRequestPost(context) {
     first_name: clean(payload.first_name),
     role: clean(payload.role),
     place: clean(payload.place),
-    hobby: clean(payload.hobby),
     mundane: clean(payload.mundane),
+    wrongdoing: clean(payload.wrongdoing),
   };
 
   if (!fields.first_name || !fields.role) {
@@ -152,8 +152,10 @@ The subject's own answers (write about THIS person only):
 - First name: ${fields.first_name}
 - Job / role: ${fields.role || "(not given)"}
 - Suburb or town: ${fields.place || "(not given)"}
-- A hobby or recent activity: ${fields.hobby || "(not given)"}
 - Something mundane they did this week: ${fields.mundane || "(not given)"}
+- A minor wrongdoing they've confessed to: ${fields.wrongdoing || "(not given)"}
+
+The "minor wrongdoing" is a trivial, self-reported peccadillo (a pinched biscuit, a late library book) and is the comic engine of the story — blow it wildly out of proportion, but treat it as the harmless triviality it is. Do NOT escalate it into a real crime or a criminal allegation, especially at the TRUE dial level.
 
 Write the front page now. Reply with the JSON object only.`;
 

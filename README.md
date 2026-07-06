@@ -50,13 +50,23 @@ accountability. Hence the closing call to action.
 ```
 index.html              The page
 css/style.css           Styles (mobile-first, light/dark, print-card aesthetic)
-js/app.js               Form handling, rendering, PNG download, counter
+js/app.js               Form handling, rendering, share, PNG download, counter
 vendor/html2canvas.min.js   Vendored so nothing loads from a CDN (CSP-friendly)
+assets/getup-logo.svg   Footer partner logo (PLACEHOLDER — swap for the official file)
 functions/api/generate.js   Pages Function: calls Anthropic, rate-limits, counts
 functions/api/counter.js    Pages Function: returns the running total
 _headers                Security headers + strict CSP
 wrangler.toml           Pages config + binding documentation
 ```
+
+The questions asked are: first name, job/role, suburb/town, one mundane thing
+you did this week, and **a minor wrongdoing of yours** (the comic engine — a
+pinched biscuit, a late library book), plus the required "answering about myself"
+checkbox.
+
+The result page has **share buttons** (native share sheet on mobile, plus X,
+Facebook, WhatsApp and copy) that lead with the absurd headline, since that's the
+most shareable part.
 
 ## Deploy on Cloudflare Pages
 
@@ -82,13 +92,17 @@ wrangler.toml           Pages config + binding documentation
    Settings → Bindings, or uncomment the block in `wrangler.toml`). Without it,
    the app still works — rate limiting is skipped and the counter is hidden.
 
-4. **Point it at your campaign** — edit the two constants at the top of
-   `js/app.js`:
+4. **Point it at your campaign** — the petition link is wired to the GetUp
+   media-reform campaign; the display URL in the card footer is a constant at the
+   top of `js/app.js`:
 
    ```js
    var CAMPAIGN_URL = "makemethefrontpage.au";
-   var PETITION_URL = "https://www.example.org/media-reform-petition";
+   var PETITION_URL = "https://www.getup.org.au/campaigns/media-reform-2026/...";
    ```
+
+   Replace `assets/getup-logo.svg` with the official GetUp logo (keep the same
+   filename); it renders subtly in the footer.
 
 ## Run locally
 

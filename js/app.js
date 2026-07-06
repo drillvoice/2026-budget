@@ -7,7 +7,8 @@
 
   // Where the campaign lives. Change these two for your deployment.
   var CAMPAIGN_URL = "makemethefrontpage.au";
-  var PETITION_URL = "https://www.example.org/media-reform-petition";
+  var PETITION_URL =
+    "https://www.getup.org.au/campaigns/media-reform-2026/press-council/time-to-fix-australia-s-broken-media";
 
   var form = document.getElementById("story-form");
   var generateBtn = document.getElementById("generate");
@@ -25,6 +26,13 @@
 
   var downloadBtn = document.getElementById("download");
   var againBtn = document.getElementById("again");
+
+  var shareNativeBtn = document.getElementById("share-native");
+  var shareX = document.getElementById("share-x");
+  var shareFb = document.getElementById("share-fb");
+  var shareWa = document.getElementById("share-wa");
+  var shareCopyBtn = document.getElementById("share-copy");
+  var shareStatus = document.getElementById("share-status");
   var howList = document.getElementById("how-list");
   var howDetails = document.getElementById("how");
 
@@ -73,8 +81,8 @@
       first_name: form.first_name.value.trim(),
       role: form.role.value.trim(),
       place: form.place.value.trim(),
-      hobby: form.hobby.value.trim(),
       mundane: form.mundane.value.trim(),
+      wrongdoing: form.wrongdoing.value.trim(),
       about_self: form.about_self.checked,
       dial: (form.querySelector('input[name="dial"]:checked') || {}).value || "true",
     };
@@ -133,6 +141,8 @@
     elFooter.textContent =
       "Generated at " + CAMPAIGN_URL + " — no watchdog would make them correct this.";
 
+    setupShare(out.headline);
+
     // "How they did it" — map the model's tagged techniques to friendly labels.
     howList.innerHTML = "";
     var techs = out.techniques_used || [];
@@ -172,6 +182,71 @@
     resultH.scrollIntoView({ behavior: "smooth", block: "start" });
     refreshCounter();
   }
+
+  // --- Share the (absurd) headline ---
+  // The headline is the hook, so it leads every share. currentShareText/Url are
+  // rebuilt per result and reused by every button (native, X, FB, WhatsApp, copy).
+  var currentShareText = "";
+  var currentShareUrl = "";
+
+  function setupShare(headline) {
+    currentShareUrl = location.origin + location.pathname;
+    currentShareText =
+      "“" + headline + "” — I turned my boring week into a tabloid front page. Make yours:";
+
+    var encText = encodeURIComponent(currentShareText);
+    var encUrl = encodeURIComponent(currentShareUrl);
+    var textPlusUrl = encodeURIComponent(currentShareText + " " + currentShareUrl);
+
+    shareX.href = "https://twitter.com/intent/tweet?text=" + encText + "&url=" + encUrl;
+    shareFb.href = "https://www.facebook.com/sharer/sharer.php?u=" + encUrl + "&quote=" + encText;
+    shareWa.href = "https://wa.me/?text=" + textPlusUrl;
+
+    // Native share sheet (mobile) — best experience where available.
+    if (navigator.share) {
+      shareNativeBtn.hidden = false;
+    } else {
+      shareNativeBtn.hidden = true;
+    }
+    shareStatus.textContent = "";
+  }
+
+  shareNativeBtn.addEventListener("click", function () {
+    if (!navigator.share) return;
+    navigator
+      .share({ title: "Make Me Tomorrow's Front Page", text: currentShareText, url: currentShareUrl })
+      .catch(function () {
+        /* user dismissed — no-op */
+      });
+  });
+
+  shareCopyBtn.addEventListener("click", function () {
+    var payload = currentShareText + " " + currentShareUrl;
+    function done() {
+      shareStatus.textContent = "Copied! Paste it anywhere.";
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(payload).then(done, fallbackCopy);
+    } else {
+      fallbackCopy();
+    }
+    function fallbackCopy() {
+      try {
+        var ta = document.createElement("textarea");
+        ta.value = payload;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "absolute";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        done();
+      } catch (e) {
+        shareStatus.textContent = "Couldn't copy — select the headline manually.";
+      }
+    }
+  });
 
   // --- Download the card as a PNG via html2canvas ---
   downloadBtn.addEventListener("click", function () {

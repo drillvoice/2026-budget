@@ -356,6 +356,40 @@ input[type="radio"] {
   }
 }
 
+/* --- Share --- */
+.share {
+  margin-top: 1.2rem;
+  padding: 1rem;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  background: #fffdf8;
+}
+.share__label {
+  font-family: system-ui, sans-serif;
+  font-weight: 700;
+  margin: 0 0 0.6rem;
+}
+.share__buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.btn--share {
+  flex: 1 1 auto;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.6rem 0.9rem;
+  border-color: var(--line);
+}
+.share__status {
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: #6a6254;
+  min-height: 1.1rem;
+  margin: 0.5rem 0 0;
+}
+
 .actions {
   display: flex;
   gap: 0.7rem;
@@ -454,6 +488,26 @@ input[type="radio"] {
   color: #4a4438;
   margin: 0 0 0.6rem;
 }
+.partner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 1.4rem 0 1rem;
+  color: #6a6254;
+}
+.partner__label {
+  font-family: system-ui, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.partner__logo {
+  height: 34px;
+  width: auto;
+  opacity: 0.85;
+  color: #6b2c91; /* used by the placeholder wordmark's currentColor */
+}
 .disclaimer {
   font-family: system-ui, sans-serif;
   font-size: 0.78rem;
@@ -480,7 +534,8 @@ input[type="radio"] {
   .field--check,
   .dial-option,
   .btn,
-  .how {
+  .how,
+  .share {
     background: #221d16;
     color: var(--ink);
   }
@@ -500,8 +555,13 @@ input[type="radio"] {
   .tech-note,
   .how-foot,
   .disclaimer,
-  .counter {
+  .counter,
+  .share__status,
+  .partner {
     color: #b3ab98;
+  }
+  .partner__logo {
+    color: #c9a6e0; /* lighter purple for the placeholder wordmark on dark */
   }
   /* The newspaper card stays paper-coloured in both themes — it's an artefact. */
   .paper {

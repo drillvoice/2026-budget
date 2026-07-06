@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" role="img" aria-label="GetUp">
+  <!-- PLACEHOLDER wordmark. Replace this file (same path/name) with the official
+       GetUp logo asset. Uses currentColor so it adapts to light/dark footer. -->
+  <text x="0" y="29" font-family="system-ui, Arial, sans-serif" font-size="26"
+        font-weight="800" letter-spacing="-0.5" fill="currentColor">GetUp<tspan fill="#e0522b">!</tspan></text>
+</svg>
