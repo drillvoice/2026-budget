@@ -53,8 +53,10 @@ css/style.css           Styles (mobile-first, light/dark, print-card aesthetic)
 js/app.js               Form handling, rendering, share, PNG download, counter
 vendor/html2canvas.min.js   Vendored so nothing loads from a CDN (CSP-friendly)
 assets/getup-logo.svg   Footer partner logo (PLACEHOLDER — swap for the official file)
+assets/share-card.png   Default social-preview (Open Graph) image, 1200×630
 functions/api/generate.js   Pages Function: calls Anthropic, rate-limits, counts
 functions/api/counter.js    Pages Function: returns the running total
+functions/p/[id].js         Pages Function: shareable permalink pages (needs KV)
 _headers                Security headers + strict CSP
 wrangler.toml           Pages config + binding documentation
 ```
@@ -64,9 +66,21 @@ you did this week, and **a minor wrongdoing of yours** (the comic engine — a
 pinched biscuit, a late library book), plus the required "answering about myself"
 checkbox.
 
-The result page has **share buttons** (native share sheet on mobile, plus X,
+The result page has **share buttons** (native share sheet on mobile — with the
+rendered front-page image attached where the platform supports it — plus X,
 Facebook, WhatsApp and copy) that lead with the absurd headline, since that's the
-most shareable part.
+most shareable part. All shared and petition URLs carry UTM parameters
+(`utm_source=frontpage`, per-channel `utm_medium`) for attribution.
+
+### Shareable permalinks
+
+When the KV namespace is bound, each generated result is stored (output only —
+never the raw form inputs) under a short random id with a **30-day expiry**, and
+shares point to **`/p/<id>`** — a server-rendered page
+(`functions/p/[id].js`) whose `og:title` is the absurd headline, so the link
+unfurls with the actual scandal. The permalink page shows the front page, the
+"How they did it" annotations, the petition CTA and a "make your own" loop back
+to the generator. Without KV, shares fall back to the home page as before.
 
 ## Deploy on Cloudflare Pages
 
@@ -82,7 +96,7 @@ most shareable part.
    ```
 
 3. **Add a KV namespace** (optional but recommended — enables IP rate limiting at
-   5 requests/hour and the counter):
+   5 requests/hour, the counter, and shareable `/p/<id>` permalinks):
 
    ```
    npx wrangler kv namespace create KV
@@ -90,16 +104,21 @@ most shareable part.
 
    Then bind it to the Pages project under the name **`KV`** (dashboard →
    Settings → Bindings, or uncomment the block in `wrangler.toml`). Without it,
-   the app still works — rate limiting is skipped and the counter is hidden.
+   the app still works — rate limiting is skipped, the counter is hidden and
+   shares fall back to the home page instead of permalinks.
 
 4. **Point it at your campaign** — the petition link is wired to the GetUp
    media-reform campaign; the display URL in the card footer is a constant at the
    top of `js/app.js`:
 
    ```js
-   var CAMPAIGN_URL = "makemethefrontpage.au";
+   var CAMPAIGN_URL = "makemethefrontpage.site";
    var PETITION_URL = "https://www.getup.org.au/campaigns/media-reform-2026/...";
    ```
+
+   `CAMPAIGN_URL` is display-only (the card footer); actual share links are
+   built from `location.origin`, so preview deployments keep working. The
+   absolute `og:` URLs in `index.html` also point at the production domain.
 
    Replace `assets/getup-logo.svg` with the official GetUp logo (keep the same
    filename); it renders subtly in the footer.
@@ -116,8 +135,10 @@ binding in `wrangler.toml` if you want to exercise rate limiting locally.
 
 ## Notes
 
-- Model: `claude-opus-4-8`, called over plain HTTPS from the Function (no SDK, so
-  the Function stays dependency-free in the Workers runtime).
+- Model: `claude-sonnet-5` (chosen for latency — people bounce during long
+  waits; swap the `MODEL` constant in `functions/api/generate.js` to change),
+  called over plain HTTPS from the Function (no SDK, so the Function stays
+  dependency-free in the Workers runtime).
 - Analytics: none beyond the single self-hosted counter.
 - _The Daily Telegram_ is a fictional masthead; stories are generated about the
   person entering their own details.

@@ -454,6 +454,32 @@ input[type="radio"] {
   margin: 0;
 }
 
+/* Compact petition prompt shown right under a generated result. */
+.cta-inline {
+  margin-top: 1.4rem;
+  padding: 1rem;
+  border: 1.5px solid var(--accent);
+  border-radius: 8px;
+  background: #fffdf8;
+  text-align: center;
+}
+.cta-inline p {
+  font-family: system-ui, sans-serif;
+  font-weight: 600;
+  margin: 0 0 0.8rem;
+}
+.cta-inline .btn--primary {
+  width: auto;
+  display: inline-block;
+}
+
+.counter--inline {
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.85rem;
+  margin: 0.7rem 0 0;
+}
+
 /* --- CTA --- */
 .cta {
   margin: 3rem 0 0;
@@ -535,7 +561,8 @@ input[type="radio"] {
   .dial-option,
   .btn,
   .how,
-  .share {
+  .share,
+  .cta-inline {
     background: #221d16;
     color: var(--ink);
   }
