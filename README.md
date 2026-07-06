@@ -1,50 +1,109 @@
-# Where do you sit? — The 2026 Budget tax reforms, in proportion
+# Make Me Tomorrow's Front Page
 
-A static, public-interest micro-site explaining who the 2026–27 Federal Budget's three tax
-reforms (negative gearing, CGT discount, discretionary trusts) actually touch — built around
-a short anonymous "Where do you sit?" quiz that places the visitor in the distribution.
+A satirical **clickbait generator** for a media-reform campaign. You answer a few
+harmless questions about your own week, pick how far the truth gets stretched,
+and a fictional tabloid — **_The Daily Telegram_** — turns your life into a
+front-page scandal, using the exact techniques real tabloids use.
 
-## Principles
+The joke has a point: it's funny because it's about you and it isn't real. For
+people caught in the real thing, the distortion has consequences and almost no
+accountability. Hence the closing call to action.
 
-- **Neutral civic explainer tone.** Cited, not preachy. Genuine edge cases (the startup CGT
-  problem) are acknowledged in their own section, not buried.
-- **Every figure is auditable.** All statistics live in [`data/stats.json`](data/stats.json)
-  with source title, URL, year, and notes. Citations on the page are rendered from that file,
-  so the copy can't drift from the sources.
-- **No tracking, no backend, no external dependencies.** The quiz runs entirely client-side;
-  nothing is stored or transmitted. No CDN fonts or scripts.
+## How it works
 
-## Structure
+- **Single-page app**, vanilla JS + CSS, no framework, mobile-first, accessible.
+- **Backend is a Cloudflare Pages Function** (`functions/api/generate.js`) that
+  calls the Anthropic API. **The API key never touches the browser.**
+- The model is prompted to write a tabloid **headline, subhead, two paragraphs**
+  and a machine-readable list of the **techniques it used**, returned as JSON:
+
+  ```json
+  { "ok": true, "headline": "...", "subhead": "...", "paragraphs": ["...", "..."],
+    "techniques_used": [{ "label": "accusation-as-question", "quote": "...", "note": "..." }] }
+  ```
+
+- The front end renders it as a newspaper card (masthead, today's date, an
+  `EXCLUSIVE` flash, a diagonal `SATIRE` watermark, and the footer line
+  _"Generated at [campaign URL] — no watchdog would make them correct this."_),
+  offers a **PNG download** (via a locally-vendored `html2canvas`), and expands a
+  **"How they did it"** panel that annotates which techniques appear in the copy.
+
+### The dial
+
+| Dial | What the model does |
+| --- | --- |
+| **True** | Only real facts, lit from the most sinister angle. No criminal allegations. |
+| **Embellished** | Distorts timing and scale; the kernel stays recognisable. |
+| **Downright Lies** | Fabricates freely, flagged implicitly through absurd over-reach. |
+
+### Guardrails (enforced in the system prompt)
+
+- Content may only concern the user's **own** inputs.
+- No real third-party names; organisations get generic labels.
+- Nothing sexual, nothing about children, no criminal allegations at **True**.
+- Refuses (with a friendly error) if the input contains another person's name or
+  hateful content. The `"I'm answering about myself"` checkbox is required and is
+  re-checked server-side.
+
+## Project layout
 
 ```
-index.html        All content + quiz markup
-css/style.css     Mobile-first styles, no framework
-js/quiz.js        Quiz logic + citation/sources rendering (reads the data files)
-data/stats.json   Every cited figure (single source of truth)
-data/quiz.json    Quiz questions, options, and per-answer verdicts
+index.html              The page
+css/style.css           Styles (mobile-first, light/dark, print-card aesthetic)
+js/app.js               Form handling, rendering, PNG download, counter
+vendor/html2canvas.min.js   Vendored so nothing loads from a CDN (CSP-friendly)
+functions/api/generate.js   Pages Function: calls Anthropic, rate-limits, counts
+functions/api/counter.js    Pages Function: returns the running total
+_headers                Security headers + strict CSP
+wrangler.toml           Pages config + binding documentation
 ```
 
-## Updating a statistic
+## Deploy on Cloudflare Pages
 
-Edit the entry in `data/stats.json` (value, source, url, year, notes). Footnote numbers and
-the Sources list update automatically. If a figure can't be verified against a primary
-source, set `"verified": false` and explain in `notes`.
+1. **Create the project** — connect this repo in the Cloudflare dashboard
+   (Workers & Pages → Create → Pages), or run `npx wrangler pages deploy .`.
+   There is no build step; the output directory is the repo root.
+
+2. **Set the API key** (secret) — Pages project → Settings → Variables and
+   Secrets:
+
+   ```
+   ANTHROPIC_API_KEY = sk-ant-...
+   ```
+
+3. **Add a KV namespace** (optional but recommended — enables IP rate limiting at
+   5 requests/hour and the counter):
+
+   ```
+   npx wrangler kv namespace create KV
+   ```
+
+   Then bind it to the Pages project under the name **`KV`** (dashboard →
+   Settings → Bindings, or uncomment the block in `wrangler.toml`). Without it,
+   the app still works — rate limiting is skipped and the counter is hidden.
+
+4. **Point it at your campaign** — edit the two constants at the top of
+   `js/app.js`:
+
+   ```js
+   var CAMPAIGN_URL = "makemethefrontpage.au";
+   var PETITION_URL = "https://www.example.org/media-reform-petition";
+   ```
 
 ## Run locally
 
+```bash
+echo "ANTHROPIC_API_KEY=sk-ant-..." > .dev.vars   # git-ignored
+npx wrangler pages dev .
 ```
-python3 -m http.server 8000
-# open http://localhost:8000
-```
 
-(Opening `index.html` directly via `file://` won't load the JSON data — use a local server.)
+Open the printed local URL. `.dev.vars` supplies the key; add a `preview_id` KV
+binding in `wrangler.toml` if you want to exercise rate limiting locally.
 
-## Deploy (GitHub Pages)
+## Notes
 
-1. Repo Settings → Pages → Source: **Deploy from a branch**, select the branch, root folder.
-2. `.nojekyll` is included so Pages serves files as-is.
-
-## Disclaimer
-
-General information only — not tax advice. Not affiliated with any party, government agency,
-or campaign.
+- Model: `claude-opus-4-8`, called over plain HTTPS from the Function (no SDK, so
+  the Function stays dependency-free in the Workers runtime).
+- Analytics: none beyond the single self-hosted counter.
+- _The Daily Telegram_ is a fictional masthead; stories are generated about the
+  person entering their own details.

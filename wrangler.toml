@@ -1,0 +1,23 @@
+# Cloudflare Pages configuration.
+# Static assets live in the repo root; server code lives in functions/.
+name = "make-me-the-front-page"
+pages_build_output_dir = "."
+compatibility_date = "2024-11-01"
+
+# --- KV namespace (optional but recommended) ---
+# Enables IP rate limiting and the "front pages printed" counter.
+# Create it once, then paste the id below (and a preview_id for local dev):
+#   npx wrangler kv namespace create KV
+# [[kv_namespaces]]
+# binding = "KV"
+# id = "<your-kv-namespace-id>"
+# preview_id = "<your-preview-kv-namespace-id>"
+
+# --- Plain-text vars ---
+# CAMPAIGN_URL is optional; the footer text is set in js/app.js.
+# [vars]
+# CAMPAIGN_URL = "makemethefrontpage.au"
+
+# --- Secret (do NOT put here) ---
+# ANTHROPIC_API_KEY is a secret. Set it in the Pages dashboard, or for local dev
+# put it in a .dev.vars file (git-ignored):  ANTHROPIC_API_KEY=sk-ant-...
