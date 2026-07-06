@@ -9,6 +9,26 @@
       content="A satirical clickbait generator: feed it your own boring week and watch a tabloid turn it into a front-page scandal. A media reform campaign."
     />
     <meta name="color-scheme" content="light dark" />
+    <link rel="canonical" href="https://makemethefrontpage.site/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://makemethefrontpage.site/" />
+    <meta property="og:site_name" content="Make Me Tomorrow's Front Page" />
+    <meta property="og:title" content="Make Me Tomorrow's Front Page" />
+    <meta
+      property="og:description"
+      content="Feed a tabloid your boring week and watch it become a front-page scandal — then help fix the real thing."
+    />
+    <meta property="og:image" content="https://makemethefrontpage.site/assets/share-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="A mock tabloid front page from The Daily Telegram, stamped SATIRE." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Make Me Tomorrow's Front Page" />
+    <meta
+      name="twitter:description"
+      content="Feed a tabloid your boring week and watch it become a front-page scandal — then help fix the real thing."
+    />
+    <meta name="twitter:image" content="https://makemethefrontpage.site/assets/share-card.png" />
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
@@ -89,6 +109,7 @@
           <button id="generate" type="submit" class="btn btn--primary">
             Print my front page
           </button>
+          <p class="counter counter--inline" data-counter hidden></p>
         </form>
 
         <p id="form-error" class="form-error" role="alert" hidden></p>
@@ -139,6 +160,15 @@
             no watchdog that would make a newspaper correct any of it.
           </p>
         </details>
+
+        <div class="cta-inline">
+          <p>
+            Funny for you — real people don't get a <strong>SATIRE</strong> watermark.
+          </p>
+          <a class="btn btn--primary petition-link" href="#" rel="noopener">
+            Sign the petition for real media accountability
+          </a>
+        </div>
       </section>
 
       <section class="cta" aria-labelledby="cta-h">
@@ -148,14 +178,14 @@
           because it isn't real. For people caught in the real thing, the
           distortion has consequences — and almost no accountability.
         </p>
-        <a class="btn btn--primary" id="petition-link" href="#" rel="noopener">
+        <a class="btn btn--primary petition-link" href="#" rel="noopener">
           Sign the petition for real media accountability
         </a>
       </section>
     </main>
 
     <footer class="site-foot">
-      <p id="counter" class="counter"></p>
+      <p class="counter" data-counter hidden></p>
       <p class="partner">
         <span class="partner__label">A campaign by</span>
         <a href="https://www.getup.org.au" target="_blank" rel="noopener">

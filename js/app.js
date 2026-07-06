@@ -6,9 +6,23 @@
   "use strict";
 
   // Where the campaign lives. Change these two for your deployment.
-  var CAMPAIGN_URL = "makemethefrontpage.au";
+  // CAMPAIGN_URL is the *display* domain printed on the card; actual share
+  // links are built from location.origin so previews keep working too.
+  var CAMPAIGN_URL = "makemethefrontpage.site";
   var PETITION_URL =
     "https://www.getup.org.au/campaigns/media-reform-2026/press-council/time-to-fix-australia-s-broken-media";
+  var UTM_CAMPAIGN = "media-reform";
+
+  function withUtm(url, medium) {
+    return (
+      url +
+      (url.indexOf("?") === -1 ? "?" : "&") +
+      "utm_source=frontpage&utm_medium=" +
+      encodeURIComponent(medium) +
+      "&utm_campaign=" +
+      UTM_CAMPAIGN
+    );
+  }
 
   var form = document.getElementById("story-form");
   var generateBtn = document.getElementById("generate");
@@ -36,7 +50,12 @@
   var howList = document.getElementById("how-list");
   var howDetails = document.getElementById("how");
 
-  document.getElementById("petition-link").setAttribute("href", PETITION_URL);
+  Array.prototype.forEach.call(
+    document.querySelectorAll(".petition-link"),
+    function (a) {
+      a.setAttribute("href", withUtm(PETITION_URL, "site"));
+    }
+  );
 
   var TECH_NAMES = {
     "accusation-as-question": "Accusation as a question",
@@ -67,10 +86,35 @@
     formError.textContent = "";
   }
 
+  // Satirical loading lines keep people entertained while the model writes.
+  var LOADING_LINES = [
+    "Writing your front page — this takes a few seconds…",
+    "Ringing unnamed sources…",
+    "Locating a friend who is “not surprised”…",
+    "Framing an accusation as an innocent question…",
+    "Doctoring the photo…",
+    "Running it past the lawyers (they've gone to lunch)…",
+    "Hold the front page…",
+  ];
+  var loadingTimer = null;
+
   function setBusy(busy) {
     generateBtn.disabled = busy;
     generateBtn.textContent = busy ? "Going to press…" : "Print my front page";
-    statusEl.textContent = busy ? "Writing your front page — this takes a few seconds…" : "";
+    if (loadingTimer) {
+      clearInterval(loadingTimer);
+      loadingTimer = null;
+    }
+    if (busy) {
+      var i = 0;
+      statusEl.textContent = LOADING_LINES[0];
+      loadingTimer = setInterval(function () {
+        i = (i + 1) % LOADING_LINES.length;
+        statusEl.textContent = LOADING_LINES[i];
+      }, 2500);
+    } else {
+      statusEl.textContent = "";
+    }
   }
 
   form.addEventListener("submit", function (e) {
@@ -141,7 +185,7 @@
     elFooter.textContent =
       "Generated at " + CAMPAIGN_URL + " — no watchdog would make them correct this.";
 
-    setupShare(out.headline);
+    setupShare(out.headline, out.id);
 
     // "How they did it" — map the model's tagged techniques to friendly labels.
     howList.innerHTML = "";
@@ -174,7 +218,8 @@
         howList.appendChild(li);
       });
     }
-    howDetails.open = false;
+    // Open by default — the technique annotations are the point of the exercise.
+    howDetails.open = true;
 
     resultSection.hidden = false;
     resultH.setAttribute("tabindex", "-1");
@@ -184,23 +229,35 @@
   }
 
   // --- Share the (absurd) headline ---
-  // The headline is the hook, so it leads every share. currentShareText/Url are
-  // rebuilt per result and reused by every button (native, X, FB, WhatsApp, copy).
+  // The headline is the hook, so it leads every share. When the server returns
+  // a permalink id, shares point at /p/<id> so recipients land on the actual
+  // front page (with its own social preview); otherwise fall back to the home
+  // page. Each channel gets its own utm_medium for attribution.
   var currentShareText = "";
-  var currentShareUrl = "";
+  var currentShareBase = "";
 
-  function setupShare(headline) {
-    currentShareUrl = location.origin + location.pathname;
+  function shareUrlFor(medium) {
+    return withUtm(currentShareBase, medium);
+  }
+
+  function setupShare(headline, id) {
+    currentShareBase = id
+      ? location.origin + "/p/" + encodeURIComponent(id)
+      : location.origin + location.pathname;
     currentShareText =
       "“" + headline + "” — I turned my boring week into a tabloid front page. Make yours:";
 
     var encText = encodeURIComponent(currentShareText);
-    var encUrl = encodeURIComponent(currentShareUrl);
-    var textPlusUrl = encodeURIComponent(currentShareText + " " + currentShareUrl);
 
-    shareX.href = "https://twitter.com/intent/tweet?text=" + encText + "&url=" + encUrl;
-    shareFb.href = "https://www.facebook.com/sharer/sharer.php?u=" + encUrl + "&quote=" + encText;
-    shareWa.href = "https://wa.me/?text=" + textPlusUrl;
+    shareX.href =
+      "https://twitter.com/intent/tweet?text=" + encText +
+      "&url=" + encodeURIComponent(shareUrlFor("x"));
+    shareFb.href =
+      "https://www.facebook.com/sharer/sharer.php?u=" +
+      encodeURIComponent(shareUrlFor("fb")) + "&quote=" + encText;
+    shareWa.href =
+      "https://wa.me/?text=" +
+      encodeURIComponent(currentShareText + " " + shareUrlFor("wa"));
 
     // Native share sheet (mobile) — best experience where available.
     if (navigator.share) {
@@ -211,17 +268,62 @@
     shareStatus.textContent = "";
   }
 
+  // Native share: include the rendered front page as an image where the
+  // platform supports sharing files — the picture is the hook. Fall back to
+  // text + URL if rendering fails or files can't be shared.
   shareNativeBtn.addEventListener("click", function () {
     if (!navigator.share) return;
-    navigator
-      .share({ title: "Make Me Tomorrow's Front Page", text: currentShareText, url: currentShareUrl })
-      .catch(function () {
+    var payload = {
+      title: "Make Me Tomorrow's Front Page",
+      text: currentShareText,
+      url: shareUrlFor("native"),
+    };
+    function shareTextOnly() {
+      navigator.share(payload).catch(function () {
         /* user dismissed — no-op */
       });
+    }
+    if (typeof window.html2canvas !== "function" || !navigator.canShare) {
+      shareTextOnly();
+      return;
+    }
+    window
+      .html2canvas(paper, {
+        scale: Math.min(2, window.devicePixelRatio || 1) * 1.5,
+        backgroundColor: null,
+        useCORS: true,
+        logging: false,
+      })
+      .then(function (canvas) {
+        return new Promise(function (resolve) {
+          canvas.toBlob(resolve, "image/png");
+        });
+      })
+      .then(function (blob) {
+        if (!blob) {
+          shareTextOnly();
+          return;
+        }
+        var file = new File([blob], "daily-telegram-front-page.png", { type: "image/png" });
+        var withFile = {
+          title: payload.title,
+          text: payload.text,
+          url: payload.url,
+          files: [file],
+        };
+        if (navigator.canShare(withFile)) {
+          navigator.share(withFile).catch(function () {
+            /* user dismissed — no-op */
+          });
+        } else {
+          shareTextOnly();
+        }
+      })
+      .catch(shareTextOnly);
   });
 
   shareCopyBtn.addEventListener("click", function () {
-    var payload = currentShareText + " " + currentShareUrl;
+    var payload = currentShareText + " " + shareUrlFor("copy");
     function done() {
       shareStatus.textContent = "Copied! Paste it anywhere.";
     }
@@ -299,9 +401,14 @@
       })
       .then(function (d) {
         if (d && typeof d.total === "number") {
-          var el = document.getElementById("counter");
-          el.textContent =
-            d.total.toLocaleString("en-AU") + " front pages printed and counting.";
+          var text = d.total.toLocaleString("en-AU") + " front pages printed and counting.";
+          Array.prototype.forEach.call(
+            document.querySelectorAll("[data-counter]"),
+            function (el) {
+              el.textContent = text;
+              el.hidden = false;
+            }
+          );
         }
       })
       .catch(function () {

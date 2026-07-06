@@ -7,9 +7,10 @@
 //   - KV                  (KV namespace, optional — enables rate limiting + counter)
 //   - CAMPAIGN_URL        (plain text var, optional — shown in the footer/CTA)
 
-const MODEL = "claude-opus-4-8";
+const MODEL = "claude-sonnet-5"; // fast enough that people don't bounce mid-wait
 const RATE_LIMIT = 5; // requests per IP per hour
 const MAX_FIELD = 120; // max chars per answer field
+const PAGE_TTL = 60 * 60 * 24 * 30; // permalinks live 30 days
 
 const DIAL_GUIDANCE = {
   true: `Dial = TRUE. Use ONLY facts the person actually gave you. Invent no events. Your craft is *framing*: take the mundane truth and light it from the most sinister possible angle using insinuation, loaded questions and juxtaposition. Nothing is fabricated, yet it reads like an exposé. No criminal allegations at this level.`,
@@ -74,6 +75,29 @@ async function rateLimit(env, ip) {
   // TTL a little over an hour so the window can roll over cleanly.
   await env.KV.put(key, String(current + 1), { expirationTtl: 4000 });
   return { ok: true };
+}
+
+function makeId() {
+  const alphabet = "abcdefghjkmnpqrstuvwxyz23456789"; // no lookalikes
+  const bytes = new Uint8Array(8);
+  crypto.getRandomValues(bytes);
+  let id = "";
+  for (const b of bytes) id += alphabet[b % alphabet.length];
+  return id;
+}
+
+// Store only the generated output (never the raw form inputs) so the result
+// can be shared as a permalink at /p/<id>. Best-effort: without KV there's
+// simply no permalink and shares fall back to the home page.
+async function storePage(env, page) {
+  if (!env.KV) return null;
+  try {
+    const id = makeId();
+    await env.KV.put(`page:${id}`, JSON.stringify(page), { expirationTtl: PAGE_TTL });
+    return id;
+  } catch (_) {
+    return null;
+  }
 }
 
 async function bumpCounter(env) {
@@ -221,12 +245,23 @@ Write the front page now. Reply with the JSON object only.`;
 
   await bumpCounter(env);
 
-  return json({
-    ok: true,
+  const page = {
     headline: parsed.headline,
     subhead: parsed.subhead,
     paragraphs: parsed.paragraphs,
     techniques_used: Array.isArray(parsed.techniques_used) ? parsed.techniques_used : [],
+    dial: dialKey,
+    created: Date.now(),
+  };
+  const id = await storePage(env, page);
+
+  return json({
+    ok: true,
+    id,
+    headline: page.headline,
+    subhead: page.subhead,
+    paragraphs: page.paragraphs,
+    techniques_used: page.techniques_used,
     dial: dialKey,
   });
 }
