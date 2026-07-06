@@ -46,15 +46,15 @@
           </div>
 
           <div class="field">
-            <label for="hobby">A hobby or something you did recently</label>
-            <input id="hobby" name="hobby" type="text" maxlength="120" autocomplete="off"
-              placeholder="e.g. joined a lawn bowls club" />
-          </div>
-
-          <div class="field">
             <label for="mundane">Something completely mundane you did this week</label>
             <input id="mundane" name="mundane" type="text" maxlength="120" autocomplete="off"
               placeholder="e.g. returned a library book two days late" />
+          </div>
+
+          <div class="field">
+            <label for="wrongdoing">A minor wrongdoing of yours</label>
+            <input id="wrongdoing" name="wrongdoing" type="text" maxlength="120" autocomplete="off"
+              placeholder="e.g. took two mints from the reception bowl" />
           </div>
 
           <div class="field field--check">
@@ -114,6 +114,18 @@
           </article>
         </div>
 
+        <div class="share" aria-labelledby="share-h">
+          <p id="share-h" class="share__label">Share your scandal</p>
+          <div class="share__buttons">
+            <button id="share-native" type="button" class="btn btn--share" hidden>Share…</button>
+            <a id="share-x" class="btn btn--share" target="_blank" rel="noopener" href="#">Post on X</a>
+            <a id="share-fb" class="btn btn--share" target="_blank" rel="noopener" href="#">Facebook</a>
+            <a id="share-wa" class="btn btn--share" target="_blank" rel="noopener" href="#">WhatsApp</a>
+            <button id="share-copy" type="button" class="btn btn--share">Copy headline + link</button>
+          </div>
+          <p id="share-status" class="share__status" role="status" aria-live="polite"></p>
+        </div>
+
         <div class="actions">
           <button id="download" type="button" class="btn">Download as image</button>
           <button id="again" type="button" class="btn btn--ghost">Start again</button>
@@ -144,6 +156,12 @@
 
     <footer class="site-foot">
       <p id="counter" class="counter"></p>
+      <p class="partner">
+        <span class="partner__label">A campaign by</span>
+        <a href="https://www.getup.org.au" target="_blank" rel="noopener">
+          <img src="/assets/getup-logo.svg" alt="GetUp" class="partner__logo" width="120" height="40" />
+        </a>
+      </p>
       <p class="disclaimer">
         Satire for a media reform campaign. "The Daily Telegram" is a fictional
         masthead. Stories are generated about the person entering their own details.
