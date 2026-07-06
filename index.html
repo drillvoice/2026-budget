@@ -1,171 +1,156 @@
 <!DOCTYPE html>
 <html lang="en-AU">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Where do you sit? — The 2026 Budget tax reforms, in proportion</title>
-<meta name="description" content="Three tax changes in the 2026 Federal Budget. An independent, fully cited guide to who they actually touch — and where you sit.">
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Make Me Tomorrow's Front Page</title>
+    <meta
+      name="description"
+      content="A satirical clickbait generator: feed it your own boring week and watch a tabloid turn it into a front-page scandal. A media reform campaign."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#make">Skip to the generator</a>
 
-<header class="hero">
-  <p class="kicker">The 2026–27 Federal Budget tax reforms</p>
-  <h1>Three tax changes.<br>Here's who they actually touch.</h1>
-  <p class="lede">Negative gearing, the capital gains discount, and family trusts are changing.
-  The coverage has been dominated by edge cases. The data tells a different story —
-  and three quick questions will show you where <em>you</em> sit.</p>
-  <a class="button" href="#quiz">Where do you sit?</a>
-  <p class="hero-note">Anonymous. Nothing is stored or sent anywhere — this page makes no network requests after loading.</p>
-</header>
+    <header class="intro">
+      <p class="kicker">A media reform campaign</p>
+      <h1>Make Me Tomorrow's Front Page</h1>
+      <p class="lede">
+        Answer a few harmless questions about your own week. Pick how far the
+        truth gets stretched. Watch a tabloid turn your life into a scandal —
+        using the exact techniques the real ones use every day.
+      </p>
+    </header>
 
-<main>
+    <main>
+      <section id="make" aria-labelledby="make-h">
+        <h2 id="make-h" class="section-h">1. Tell us about you</h2>
+        <form id="story-form" novalidate>
+          <div class="field">
+            <label for="first_name">Your first name <span class="req" aria-hidden="true">*</span></label>
+            <input id="first_name" name="first_name" type="text" maxlength="120" autocomplete="off" required />
+          </div>
 
-<section id="quiz" aria-labelledby="quiz-heading">
-  <h2 id="quiz-heading">Where do you sit?</h2>
-  <form id="quiz-form" novalidate>
-    <div id="quiz-questions"><!-- rendered by quiz.js --></div>
-    <button type="submit" class="button">Show my result</button>
-  </form>
-  <div id="quiz-result" role="region" aria-live="polite" hidden>
-    <h3>Your result</h3>
-    <div id="quiz-verdicts"></div>
-    <div id="quiz-benefits"></div>
-    <p class="result-note">This is general information drawn from the sources cited below — not tax advice.
-    For decisions about your own affairs, talk to a registered tax agent.</p>
-    <button type="button" id="quiz-reset" class="button button-secondary">Start again</button>
-  </div>
-  <noscript><p class="notice">The quiz needs JavaScript, but everything it would tell you is in the plain-language sections below.</p></noscript>
-</section>
+          <div class="field">
+            <label for="role">Your job or role <span class="req" aria-hidden="true">*</span></label>
+            <input id="role" name="role" type="text" maxlength="120" autocomplete="off" required
+              placeholder="e.g. primary school teacher" />
+          </div>
 
-<section id="negative-gearing" aria-labelledby="ng-heading">
-  <h2 id="ng-heading">1. Negative gearing</h2>
-  <h3>What changes</h3>
-  <p>From 1 July 2027, rental losses on <strong>established</strong> investment properties bought after Budget night
-  (7:30pm, 12 May 2026) can no longer be deducted against your salary. They're quarantined: carried forward and offset
-  against rental income or capital gains from rental property instead. <strong>New builds keep full negative
-  gearing</strong> — the reform redirects the concession toward adding housing supply.<sup class="cite" data-cite="ng-grandfathering"></sup></p>
-  <h3>Who it touches</h3>
-  <p>In 2022–23, about 2.26 million individuals had an interest in a rental property — out of roughly 16 million who
-  lodged tax returns. More than 8 in 10 taxfilers own no investment property at all, so for most people there is
-  simply nothing here to lose.<sup class="cite" data-cite="investors-count"></sup>
-  Negative gearing cost the budget about $10.9&nbsp;billion in forgone revenue in
-  2023–24.<sup class="cite" data-cite="ng-cost"></sup></p>
-  <figure class="waffle" data-highlight="14"
-    data-label="Of 100 Australian taxfilers, about 14 have an interest in a rental property; 86 do not.">
-    <figcaption>If 100 people filed a tax return, about <strong>14</strong> would have an interest in a rental
-    property — and only those who bought an <em>established</em> rental after Budget night see any change at
-    all.<sup class="cite" data-cite="investors-count"></sup></figcaption>
-  </figure>
-  <h3>What's grandfathered</h3>
-  <p>Every investment property acquired — by contract date — before Budget night is completely unaffected, forever.
-  If you owned a rental on 12 May 2026, nothing about how you negatively gear it changes.<sup class="cite" data-cite="ng-grandfathering"></sup></p>
-  <h3>The common misunderstanding</h3>
-  <p>Much of the alarm assumes existing investors lose their deductions. They don't. The change only applies to
-  <em>established</em> properties bought <em>after</em> Budget night — a group that, by definition, didn't exist when
-  the policy was announced and can plan around it.</p>
-</section>
+          <div class="field">
+            <label for="place">Your suburb or town</label>
+            <input id="place" name="place" type="text" maxlength="120" autocomplete="off"
+              placeholder="e.g. Marrickville" />
+          </div>
 
-<section id="capital-gains" aria-labelledby="cgt-heading">
-  <h2 id="cgt-heading">2. Capital gains tax</h2>
-  <h3>What changes</h3>
-  <p>From 1 July 2027, the 50% CGT discount is replaced with inflation indexation of the cost base — you pay tax only
-  on <em>real</em> gains, the way Australia did from 1985 to 1999 — plus a minimum 30% rate on net capital
-  gains.<sup class="cite" data-cite="cgt-transition"></sup></p>
-  <h3>Who it touches</h3>
-  <p>In any given year, only about 7% of taxpayers report a capital gain at all<sup class="cite" data-cite="cgt-reporters"></sup> —
-  and around 83% of the benefit of the current discount flows to the top 10% of taxpayers by
-  income.<sup class="cite" data-cite="cgt-top10"></sup> If you're not regularly realising large capital gains, the
-  change is close to invisible to you. Your family home remains exempt from CGT entirely — that hasn't changed.</p>
-  <figure class="waffle waffle-dollars" data-highlight="83"
-    data-label="Of every 100 dollars of benefit from the current CGT discount, about 83 dollars go to the top 10 per cent of taxpayers by income.">
-    <figcaption>Of every <strong>$100</strong> of benefit from the current discount, about <strong>$83</strong> goes
-    to the top 10% of taxpayers by income.<sup class="cite" data-cite="cgt-top10"></sup></figcaption>
-  </figure>
-  <h3>What's grandfathered</h3>
-  <p>Gains accrued before 1 July 2027 keep the 50% discount even if you sell years later. Only growth after that date
-  falls under the new rules; a valuation at the changeover (or an ATO formula) splits the
-  two.<sup class="cite" data-cite="cgt-transition"></sup></p>
-  <h3>The common misunderstanding</h3>
-  <p>"Indexation means paying more tax" — usually it doesn't, for steadily appreciating assets. The new system taxes
-  the real gain instead of half the nominal gain; which is larger depends on how fast the asset grew relative to
-  inflation. The case where indexation genuinely bites — very fast growth from a near-zero cost base — is real, and
-  covered honestly below.</p>
-</section>
+          <div class="field">
+            <label for="hobby">A hobby or something you did recently</label>
+            <input id="hobby" name="hobby" type="text" maxlength="120" autocomplete="off"
+              placeholder="e.g. joined a lawn bowls club" />
+          </div>
 
-<section id="trusts" aria-labelledby="trusts-heading">
-  <h2 id="trusts-heading">3. Family trusts — and the "death tax" claim</h2>
-  <h3>What changes</h3>
-  <p>From 1 July 2028, distributions from discretionary trusts are taxed at a minimum of 30%. This ends the main tax
-  benefit of "income splitting" — routing a high earner's income through a trust to family members on low marginal
-  rates.<sup class="cite" data-cite="trust-carveouts"></sup></p>
-  <h3>Who it touches</h3>
-  <p>About 810,000 adults — roughly 5% of individual taxfilers — received discretionary trust distributions in
-  2022–23. The Government's factsheet estimates more than 95% of taxfilers won't be affected in any given
-  year.<sup class="cite" data-cite="trust-recipients"></sup> Of small businesses, fewer than 15% operate through a
-  discretionary trust.<sup class="cite" data-cite="trust-small-business"></sup> And beneficiaries already paying 30%
-  or more on their distributions see little change — the measure mainly affects distributions taxed below 30%.</p>
-  <figure class="waffle" data-highlight="5"
-    data-label="Of 100 Australian taxfilers, about 5 received a distribution from a discretionary trust in 2022 to 2023; 95 did not.">
-    <figcaption>If 100 people filed a tax return, about <strong>5</strong> received a discretionary trust distribution
-    in 2022–23 — and fewer still are taxed below 30% on it. The other <strong>95</strong> are
-    untouched.<sup class="cite" data-cite="trust-recipients"></sup></figcaption>
-  </figure>
-  <h3>Is it a death tax? No.</h3>
-  <p>The 30% minimum applies to <strong>income distributions</strong> from discretionary trusts — not to inheritance,
-  not to assets passing under a will, and not to deceased estates. Explicitly excluded:
-  <strong>testamentary trusts in existence on 12 May 2026</strong>, <strong>deceased estates</strong>,
-  <strong>special disability trusts</strong>, charitable trusts, fixed and widely held trusts, and complying super
-  funds.<sup class="cite" data-cite="trust-carveouts"></sup> Australia abolished inheritance taxes decades ago, and
-  this Budget does not reintroduce one. Calling this a death tax is not an interpretation — it's a factual error.</p>
-</section>
+          <div class="field">
+            <label for="mundane">Something completely mundane you did this week</label>
+            <input id="mundane" name="mundane" type="text" maxlength="120" autocomplete="off"
+              placeholder="e.g. returned a library book two days late" />
+          </div>
 
-<section id="caveats" aria-labelledby="caveats-heading" class="caveats">
-  <h2 id="caveats-heading">The honest caveats</h2>
-  <p>A fair accounting means acknowledging where the criticism has a point.</p>
-  <h3>The startup problem is real</h3>
-  <p>Indexation works well for assets bought at a meaningful price. It works badly for founder equity and early
-  startup shares with a near-zero cost base: indexing almost-nothing for inflation gives almost-nothing, so nearly the
-  entire gain is taxed at a minimum 30% — a genuinely worse outcome than the 50% discount. This deserves a targeted
-  fix, not wholesale rejection of the reform, and the Treasurer has confirmed the Government is examining options for
-  small and startup businesses, including retaining discount-like treatment for qualifying
-  companies.<sup class="cite" data-cite="startup-review"></sup></p>
-  <h3>Other genuine pressure points</h3>
-  <ul>
-    <li><strong>Valuation friction.</strong> Splitting pre- and post-July-2027 gains requires a valuation or an ATO
-    formula. For unlisted assets that's real cost and uncertainty.<sup class="cite" data-cite="cgt-transition"></sup></li>
-    <li><strong>Small businesses in trusts.</strong> A minority of small businesses do run through discretionary
-    trusts; for those whose beneficiaries are on low rates, tax goes up. The carve-outs (primary production income,
-    vulnerable minors) catch some but not all hard cases.<sup class="cite" data-cite="trust-small-business"></sup></li>
-    <li><strong>The minimum 30% rate on gains</strong> is a higher floor than some middle-income, infrequent sellers
-    pay today under the discount.</li>
-    <li><strong>Renters and overall supply.</strong> The same Treasury modelling that forecasts 75,000 homes shifting
-    to first home buyers also estimates overall supply about 35,000 dwellings lower over the decade and rents around
-    $2 a week higher at the current median — modest, but not zero.<sup class="cite" data-cite="fhb-shift"></sup></li>
-  </ul>
-  <p>None of this changes the distributional core: each reform leaves the large majority of Australians untouched,
-  and the benefits being trimmed flowed overwhelmingly to the highest earners. But edge cases are how good reforms
-  get discredited — they're better acknowledged and fixed than denied.</p>
-</section>
+          <div class="field field--check">
+            <input id="about_self" name="about_self" type="checkbox" required />
+            <label for="about_self">
+              I'm answering about myself, not someone else.
+              <span class="req" aria-hidden="true">*</span>
+            </label>
+          </div>
 
-<section id="sources" aria-labelledby="sources-heading">
-  <h2 id="sources-heading">Sources</h2>
-  <ol id="sources-list"><!-- rendered by quiz.js from data/stats.json --></ol>
-  <h3>Methodology notes</h3>
-  <p>"More than 8 in 10 taxfilers own no investment property" derives from 2,261,080 individuals with rental
-  interests (ATO, 2022–23) against roughly 16 million individual lodgers — about 86%. Measured against the ~11.4
-  million net taxpayers instead, it is about 80%. We use the conservative phrasing rather than a single contested
-  percentage. The quiz runs entirely in your browser; answers are never transmitted or stored.</p>
-</section>
+          <fieldset class="dial">
+            <legend><span class="section-h">2. Pick your dial</span></legend>
+            <div class="dial-options">
+              <label class="dial-option">
+                <input type="radio" name="dial" value="true" checked />
+                <span class="dial-name">True</span>
+                <span class="dial-desc">Only real facts — lit from the most sinister angle.</span>
+              </label>
+              <label class="dial-option">
+                <input type="radio" name="dial" value="embellished" />
+                <span class="dial-name">Embellished</span>
+                <span class="dial-desc">Timing and scale get… generously distorted.</span>
+              </label>
+              <label class="dial-option">
+                <input type="radio" name="dial" value="lies" />
+                <span class="dial-name">Downright Lies</span>
+                <span class="dial-desc">Gloriously, obviously invented.</span>
+              </label>
+            </div>
+          </fieldset>
 
-</main>
+          <button id="generate" type="submit" class="btn btn--primary">
+            Print my front page
+          </button>
+        </form>
 
-<footer>
-  <p>An independent public-interest explainer. Not affiliated with any party, government agency, or campaign.
-  Not tax advice. Source code and data are public — every figure on this page is in
-  <a href="data/stats.json">one auditable file</a>.</p>
-</footer>
+        <p id="form-error" class="form-error" role="alert" hidden></p>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </section>
 
-<script src="js/quiz.js"></script>
-</body>
+      <section id="result-section" aria-labelledby="result-h" hidden>
+        <h2 id="result-h" class="section-h">Tomorrow's front page</h2>
+
+        <div id="paper-wrap">
+          <article id="paper" class="paper" aria-live="polite">
+            <div class="paper__masthead">
+              <span class="paper__price">50¢</span>
+              <span class="paper__name">The Daily Telegram</span>
+              <span class="paper__date" id="paper-date"></span>
+            </div>
+            <div class="paper__flash">EXCLUSIVE</div>
+            <h3 class="paper__headline" id="paper-headline"></h3>
+            <p class="paper__subhead" id="paper-subhead"></p>
+            <div class="paper__body" id="paper-body"></div>
+            <p class="paper__footer" id="paper-footer"></p>
+            <div class="paper__watermark" aria-hidden="true">SATIRE</div>
+          </article>
+        </div>
+
+        <div class="actions">
+          <button id="download" type="button" class="btn">Download as image</button>
+          <button id="again" type="button" class="btn btn--ghost">Start again</button>
+        </div>
+
+        <details id="how" class="how">
+          <summary>How they did it — the techniques in your story</summary>
+          <ul id="how-list" class="how-list"></ul>
+          <p class="how-foot">
+            None of these are made up. They're standard tabloid craft — and there's
+            no watchdog that would make a newspaper correct any of it.
+          </p>
+        </details>
+      </section>
+
+      <section class="cta" aria-labelledby="cta-h">
+        <h2 id="cta-h">Funny when it's fake.<br />It wasn't fake for Brittany Higgins.</h2>
+        <p>
+          A joke about your library fines is harmless because it's about you, and
+          because it isn't real. For people caught in the real thing, the
+          distortion has consequences — and almost no accountability.
+        </p>
+        <a class="btn btn--primary" id="petition-link" href="#" rel="noopener">
+          Sign the petition for real media accountability
+        </a>
+      </section>
+    </main>
+
+    <footer class="site-foot">
+      <p id="counter" class="counter"></p>
+      <p class="disclaimer">
+        Satire for a media reform campaign. "The Daily Telegram" is a fictional
+        masthead. Stories are generated about the person entering their own details.
+      </p>
+    </footer>
+
+    <script src="/vendor/html2canvas.min.js" defer></script>
+    <script src="/js/app.js" defer></script>
+  </body>
 </html>
