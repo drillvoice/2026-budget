@@ -7,12 +7,12 @@ compatibility_date = "2024-11-01"
 # --- KV namespace (optional but recommended) ---
 # Enables IP rate limiting, the "front pages printed" counter, and shareable
 # permalinks (/p/<id> — stored generated output only, 30-day expiry).
-# Create it once, then paste the id below (and a preview_id for local dev):
-#   npx wrangler kv namespace create KV
-# [[kv_namespaces]]
-# binding = "KV"
-# id = "<your-kv-namespace-id>"
-# preview_id = "<your-preview-kv-namespace-id>"
+# Create it once, then paste the id below. Because this file sets
+# pages_build_output_dir, Cloudflare Pages manages bindings from here —
+# the dashboard binding UI is locked while this file is in the repo.
+[[kv_namespaces]]
+binding = "KV"
+id = "d42c70e1e75e4b1eab5a1214cbdd3e97"
 
 # --- Plain-text vars ---
 # CAMPAIGN_URL is optional; the footer text is set in js/app.js.
